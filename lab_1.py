@@ -5,15 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-
 def get_image(image_link, name, index):
     if not os.path.isdir(name):
         os.mkdir(name)
     picture = requests.get(image_link)
     with open(os.path.join(f"{name}/{str(index).zfill(4)}.jpg"), "wb") as saver:
         saver.write(picture.content)
-
-
 
 def get_url_images(path, search_query):
     os.chdir(path)
@@ -27,7 +24,6 @@ def get_url_images(path, search_query):
     while count < 1000:
         search_query1 = search_query.replace(" ", "%20")
         url = f"https://yandex.ru/images/search?p={page}&text={search_query1}"
-
 
         driver = webdriver.Chrome()
         driver.get(url=url)
@@ -52,8 +48,6 @@ def get_url_images(path, search_query):
         page += 1
     driver.close()
     driver.quit()
-
-
 
 def main():
     directory = os.getcwd()
